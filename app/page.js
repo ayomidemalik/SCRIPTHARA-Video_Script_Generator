@@ -24,12 +24,12 @@ const placeholderExamples = [
 export default function Home() {
   const [script, setScript] = useState('');
   const [input, setInput] = useState('');
-  const [placeholder, setPlaceholder] = useState(''); // State for the randomized placeholder
+  const [placeholder, setPlaceholder] = useState('');
   const [showConfetti, setShowConfetti] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [isCopied, setIsCopied] = useState(false); // State for copy icon animation
   const scriptOutputRef = useRef(null);
 
-  // Set a random placeholder only once when the component mounts
   useEffect(() => {
     const randomIndex = Math.floor(Math.random() * placeholderExamples.length);
     setPlaceholder(placeholderExamples[randomIndex]);
@@ -45,7 +45,7 @@ export default function Home() {
     setIsGenerating(true);
     setScript('');
   };
-  
+
   const handleGenerationEnd = () => {
     setIsGenerating(false);
   };
@@ -54,6 +54,15 @@ export default function Home() {
     setScript('');
     setInput('');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleCopyEmail = () => {
+    if (isCopied) return;
+    navigator.clipboard.writeText('memudabdulmalik11@gmail.com');
+    setIsCopied(true);
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 2500); // Reset icon after 2.5 seconds
   };
 
   useEffect(() => {
@@ -74,7 +83,6 @@ export default function Home() {
   return (
     <main>
       <div className="main-container">
-        {/* The spinner overlay is now here, controlled by isGenerating state */}
         <AnimatePresence>
           {isGenerating && (
             <motion.div
@@ -89,13 +97,23 @@ export default function Home() {
           )}
         </AnimatePresence>
         
-        {/* Changed class from fixed-author-info to author-info */}
         <div className="author-info">
           <p className="author-name">By Abdulmalik Memud</p>
-          <a href="mailto:memudabdulmalik11@gmail.com" className="author-email">memudabdulmalik11@gmail.com</a>
+          <div className="email-container">
+            <a href="mailto:memudabdulmalik11@gmail.com" className="author-email">memudabdulmalik11@gmail.com</a>
+            <button
+              onClick={handleCopyEmail}
+              className={`copy-email-button ${isCopied ? 'copied' : ''}`}
+              aria-label="Copy email"
+            >
+              <svg className="copy-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path className="clipboard" d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z" fill="currentColor"/>
+                <path className="checkmark" d="M9.55 18.2L5.85 14.5L4.44 15.91L9.55 21L20.55 10L19.14 8.59L9.55 18.2Z" fill="currentColor" />
+              </svg>
+            </button>
+          </div>
         </div>
         
-        {/* Changed class and removed "My" span */}
         <a href="https://github.com/ayomidemalik" target="_blank" rel="noopener noreferrer" className="header-link">View More Projects</a>
         
         <ParticlesBackground />
@@ -145,7 +163,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <footer className="page-footer"><p>&copy; Copyright Scripthara 2025</p></footer>
+        <footer className="page-footer"><p>&copy; Scripthara 2025</p></footer>
       </div>
     </main>
   );

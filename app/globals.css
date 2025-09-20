@@ -36,11 +36,48 @@ body { font-family: var(--font-arvo), serif; line-height: 1.6; color: var(--text
 @media (min-width: 768px) { .col-md-10 { flex: 0 0 83.333333%; max-width: 83.333333%; } }
 .justify-center { justify-content: center; }
 
-/* --- HEADER ELEMENTS (NO LONGER FIXED) --- */
+/* --- HEADER ELEMENTS --- */
 .author-info { position: absolute; top: 1.5rem; left: 1.5rem; z-index: 1000; text-align: left; }
-.author-name { font-weight: 700; color: var(--text-dark); font-size: 0.8rem; }
-.author-email { font-size: 0.8rem; color: var(--text-light); text-decoration: none; }
+.author-name { font-weight: 700; color: var(--text-dark); font-size: 0.8rem; margin-bottom: 0.25rem; }
+.email-container { display: flex; align-items: center; gap: 0.5rem; position: relative; }
+.author-email { font-size: 0.8rem; color: var(--text-light); text-decoration: none; transition: var(--transition); }
 .author-email:hover { color: var(--primary-pink); }
+
+/* --- FANCY COPY BUTTON & ICON ANIMATION --- */
+.copy-email-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: var(--text-light);
+  transition: all 0.3s ease;
+}
+.copy-email-button:hover {
+  color: var(--primary-purple);
+  background-color: rgba(168, 85, 247, 0.1);
+}
+.copy-email-button .copy-icon {
+  width: 16px;
+  height: 16px;
+  position: relative;
+}
+.copy-icon .clipboard, .copy-icon .checkmark {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform-origin: center;
+}
+.copy-icon .checkmark {
+  opacity: 0;
+  transform: scale(0.5);
+}
+.copy-email-button.copied { color: #16a34a; /* Green for success */ }
+.copy-email-button.copied:hover { background-color: rgba(22, 163, 74, 0.1); }
+.copy-email-button.copied .clipboard { opacity: 0; transform: scale(0.5); }
+.copy-email-button.copied .checkmark { opacity: 1; transform: scale(1); }
 
 .header-link { position: absolute; top: 1.5rem; right: 1.5rem; z-index: 1000; background-color: rgba(255, 255, 255, 0.6); backdrop-filter: blur(5px); padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-weight: 600; color: var(--primary-purple); box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: var(--transition); display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; }
 .header-link:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.15); color: var(--primary-pink); }

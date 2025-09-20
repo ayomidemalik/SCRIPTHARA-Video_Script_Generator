@@ -40,7 +40,12 @@ body { font-family: var(--font-arvo), serif; line-height: 1.6; color: var(--text
 .author-info { position: absolute; top: 1.5rem; left: 1.5rem; z-index: 1000; text-align: left; }
 .author-name { font-weight: 700; color: var(--text-dark); font-size: 0.8rem; margin-bottom: 0.25rem; }
 .email-container { display: flex; align-items: center; gap: 0.5rem; position: relative; }
-.author-email { font-size: 0.8rem; color: var(--text-light); text-decoration: none; transition: var(--transition); }
+.author-email {
+  font-size: 0.75rem; /* <-- THIS IS THE CHANGED VALUE */
+  color: var(--text-light);
+  text-decoration: none;
+  transition: var(--transition);
+}
 .author-email:hover { color: var(--primary-pink); }
 
 /* --- FANCY COPY BUTTON & ICON ANIMATION --- */
@@ -160,6 +165,7 @@ textarea:focus { border-color: var(--primary-pink); box-shadow: 0 0 0 2px rgba(2
 @media (max-width: 768px) {
   .author-info { top: 1rem; left: 1rem; }
   .header-link { top: 1rem; right: 1rem; padding: 0.4rem 0.8rem; font-size: 0.75rem; }
-  .author-name, .author-email { font-size: 0.75rem; }
+  .author-name { font-size: 0.75rem; }
+  .author-email { font-size: 0.7rem; } /* <-- THIS IS THE CHANGED VALUE FOR MOBILE */
   .page-content { padding: 6rem 15px 8rem 15px; }
 }

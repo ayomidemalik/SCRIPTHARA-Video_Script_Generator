@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import GenerateForm from '@/components/GenerateForm';
 import ScriptOutput from '@/components/ScriptOutput';
 import ParticlesBackground from '@/components/ParticlesBackground';
+import LoadingSpinner from '@/components/LoadingSpinner';
 import dynamic from 'next/dynamic';
 
 const Confetti = dynamic(() => import('react-confetti'), { ssr: false });
@@ -73,8 +74,30 @@ export default function Home() {
   return (
     <main>
       <div className="main-container">
-        <div className="fixed-author-info"><p className="author-name">By Abdulmalik Memud</p><a href="mailto:memudabdulmalik11@gmail.com" className="author-email">memudabdulmalik11@gmail.com</a></div>
-        <a href="https://github.com/ayomidemalik" target="_blank" rel="noopener noreferrer" className="fixed-header-link"><span className="fixed-header-link-my">My</span> View More Projects</a>
+        {/* The spinner overlay is now here, controlled by isGenerating state */}
+        <AnimatePresence>
+          {isGenerating && (
+            <motion.div
+              className="spinner-overlay"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <LoadingSpinner />
+            </motion.div>
+          )}
+        </AnimatePresence>
+        
+        {/* Changed class from fixed-author-info to author-info */}
+        <div className="author-info">
+          <p className="author-name">By Abdulmalik Memud</p>
+          <a href="mailto:memudabdulmalik11@gmail.com" className="author-email">memudabdulmalik11@gmail.com</a>
+        </div>
+        
+        {/* Changed class and removed "My" span */}
+        <a href="https://github.com/ayomidemalik" target="_blank" rel="noopener noreferrer" className="header-link">View More Projects</a>
+        
         <ParticlesBackground />
         {showConfetti && <Confetti recycle={false} numberOfPieces={500} colors={['#ec4899', '#a855f7', '#f59e0b']} />}
 

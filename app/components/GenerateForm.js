@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import LoadingSpinner from './LoadingSpinner';
 
 const primaryDurations = [15, 30, 45, 60];
 const moreDurations = ['1m 30s', '2m', '3m', '5m', '10m'];
@@ -102,11 +101,7 @@ export default function GenerateForm({ input, onInputChange, onGenerate, onGener
         </button>
       </form>
       
-      {isGenerating && (
-        <div className="spinner-container-form">
-          <LoadingSpinner />
-        </div>
-      )}
+      {/* Spinner container has been removed from here */}
     </>
   );
 }

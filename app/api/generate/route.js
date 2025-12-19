@@ -63,7 +63,7 @@ export async function POST(request) {
       return Response.json({ script: generateFallbackScript(cleanInput), warning: "Add GEMINI_API_KEY in .env.local" });
     }
 
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
     
     // Updated prompt with the new structure
     const prompt = `
